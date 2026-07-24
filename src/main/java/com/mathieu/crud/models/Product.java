@@ -1,5 +1,7 @@
 package com.mathieu.crud.models;
 
+import java.math.BigDecimal;
+
 // JPA annotations for entity mapping (implemented by Hibernate)
 import jakarta.persistence.*;
 
@@ -14,5 +16,17 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    // Prevent to get an empty product name 
+    @Column(nullable = false)
+    private String name;
+
+    // Having a description is an obligation for a product
+    @Column(nullable = false)
+    private String description;
+
+    // Having a price is an obligation for a product
+    @Column(nullable = false)
+    private BigDecimal price;
 
 }
