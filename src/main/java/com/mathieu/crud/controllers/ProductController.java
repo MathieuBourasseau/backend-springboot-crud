@@ -49,7 +49,18 @@ public class ProductController {
         try {
             Product updatedProduct = productService.updateProduct(id, dto);
             return ResponseEntity.ok(updatedProduct);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // Route in DELETE to delete a product
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+        try {
+            productService.deleteProduct(id);
+            return ResponseEntity.noContent().build();
+        } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
     }
