@@ -19,11 +19,13 @@ public class ProductController {
         this.productService = productService;
     }
 
+    // Route that consumes the method getAllProducts of productService
     @GetMapping
     public List<Product> getAllProducts() {
         return productService.getAllProducts();
     }
 
+    // Route that consumes the method getProductById of productService
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
         try {
@@ -33,4 +35,13 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    // Route in POST to add a new product
+   @PostMapping
+   public ResponseEntity<Product> createProduct(@RequestBody ProductCreateDto dto){
+    Product createdProduct = productService.createProduct(dto);
+    return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
+   }
+
+
 }
