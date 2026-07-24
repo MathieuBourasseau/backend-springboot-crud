@@ -37,11 +37,21 @@ public class ProductController {
     }
 
     // Route in POST to add a new product
-   @PostMapping
-   public ResponseEntity<Product> createProduct(@RequestBody ProductCreateDto dto){
-    Product createdProduct = productService.createProduct(dto);
-    return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
-   }
+    @PostMapping
+    public ResponseEntity<Product> createProduct(@RequestBody ProductCreateDto dto) {
+        Product createdProduct = productService.createProduct(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
+    }
 
+    // Route in PUT to update a product
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody ProductCreateDto dto) {
+        try {
+            Product updatedProduct = productService.updateProduct(id, dto);
+            return ResponseEntity.ok(updatedProduct);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }
