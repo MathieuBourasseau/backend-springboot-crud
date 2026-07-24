@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 // Precise to Spring Boot that this is a Repository
 @Repository
 
+// Methods set up by Product entity
 public interface ProductRepository extends JpaRepository<Product, Long> { 
 
     // Create automatic methods from JpaRepository like :
