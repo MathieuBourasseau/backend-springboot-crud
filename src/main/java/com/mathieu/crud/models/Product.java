@@ -29,4 +29,14 @@ public class Product {
     @Column(nullable = false)
     private BigDecimal price;
 
+    // Empty constructor needed to use ORM
+    public Product() {}
+
+    // Constructor with parameters to create a new product
+    public Product(String name, String description, BigDecimal price){
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
+
 }
