@@ -3,6 +3,9 @@ package com.mathieu.crud.controllers;
 import com.mathieu.crud.dto.ProductCreateDto;
 import com.mathieu.crud.models.Product;
 import com.mathieu.crud.services.ProductService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,14 +41,14 @@ public class ProductController {
 
     // Route in POST to add a new product
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody ProductCreateDto dto) {
+    public ResponseEntity<Product> createProduct(@Valid @RequestBody ProductCreateDto dto) {
         Product createdProduct = productService.createProduct(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
     }
 
     // Route in PUT to update a product
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody ProductCreateDto dto) {
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @Valid @RequestBody ProductCreateDto dto) {
         try {
             Product updatedProduct = productService.updateProduct(id, dto);
             return ResponseEntity.ok(updatedProduct);
